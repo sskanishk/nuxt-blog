@@ -1,19 +1,38 @@
 <template>
   <div class="posts-page">
-    <PostList />
+    <PostList :posts="loadedPosts"/>
   </div>
 </template>
 
 
 <script>
-import PostPreview from '@/components/Posts/PostPreview'
 import PostList from '@/components/Posts/PostList'
 
 export default {
   components: {
-    PostPreview,
     PostList
-  }
+  },
+  asyncData(context){
+    // console.log(context, "post non id")
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({
+          loadedPosts: [
+            {id: "1", thumbnail: 'https://i.ibb.co/2FnP4mP/nate-grant-QQ9-Lain-S6t-I-unsplash.jpg', title:'Hello there - the one time!', previewText:'This my one post!'},
+            {id: "2", thumbnail: 'https://i.ibb.co/2FnP4mP/nate-grant-QQ9-Lain-S6t-I-unsplash.jpg', title:'Hello there - the two time!', previewText:'This my two post!'},
+            {id: "3", thumbnail: 'https://i.ibb.co/2FnP4mP/nate-grant-QQ9-Lain-S6t-I-unsplash.jpg', title:'Hello there - the three time!', previewText:'This my three post!'},
+            {id: "4", thumbnail: 'https://i.ibb.co/2FnP4mP/nate-grant-QQ9-Lain-S6t-I-unsplash.jpg', title:'Hello there - the four time!', previewText:'This my four post!'},
+          ]
+        });
+      }, 1500)
+    }).then(data => {
+      console.log("CONTEXT=-------- " + data)
+      console.log(data)
+      return data
+    }).catch(e => {
+      context.error(new Error());
+    })
+  },
 }
 </script>
 

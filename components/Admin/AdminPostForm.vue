@@ -33,6 +33,7 @@ export default {
     },
     data(){
         return{
+            // when props are available then display props otherwise dispaly blank given below
             editedPost: this.post ? { ...this.post } : {
                 author: "",
                 title:"",
