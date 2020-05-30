@@ -9,10 +9,14 @@
 import PostList from '@/components/Posts/PostList'
 
 export default {
+
+
   components: {
     PostList
   },
-  asyncData(context){
+
+
+  fetch(context){
     // console.log(context, "post non id")
     return new Promise((resolve, reject) => {
       setTimeout(() => {
@@ -26,19 +30,35 @@ export default {
         });
       }, 1500)
     }).then(data => {
-      console.log("CONTEXT=-------- " + data)
-      console.log(data)
-      return data
+      // console.log("data")
+      // console.log(data)
+      // return data
+      context.store.commit('setPosts', data.loadedPosts)
     }).catch(e => {
-      context.error(new Error());
-    })
+      context.error(e);
+    });
   },
-}
+
+
+  // life cycle hook
+  // created(){
+  //   this.$store.dispatch('setPosts', this.loadedPosts)
+  //   console.log("post page")
+  //   console.log(this.$store.getters.loadedPosts)
+  // },
+  
+  computed: {
+    loadedPosts(){
+      return this.$store.getters.loadedPosts
+    }
+  }
+
+
+};
 </script>
 
 
 <style scoped>
-
 .posts-page {
   display: flex;
   justify-content: center;
