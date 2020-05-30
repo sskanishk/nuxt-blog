@@ -3,7 +3,7 @@
     <section class="intro">
       <!-- <h1>Get the latest tech news!</h1> -->
     </section>
-    <PostList />      
+    <PostList :posts="loadedPosts" />      
   </div>
 </template>
 
@@ -13,7 +13,38 @@ import PostList from '@/components/Posts/PostList'
 export default {
   components: {
     PostList
-  }
+  },
+  // data(){
+  //   return{
+  //     loadedPosts: []
+  //   }
+  // },
+
+  asyncData(context, callback){
+    // console.log(context)
+    setTimeout(() => {
+      callback(null, {
+        loadedPosts: [
+          {id: "1", thumbnail: 'https://i.ibb.co/2FnP4mP/nate-grant-QQ9-Lain-S6t-I-unsplash.jpg', title:'Hello there - the one time!', previewText:'This my one post!'},
+          {id: "2", thumbnail: 'https://i.ibb.co/2FnP4mP/nate-grant-QQ9-Lain-S6t-I-unsplash.jpg', title:'Hello there - the two time!', previewText:'This my two post!'},
+          {id: "3", thumbnail: 'https://i.ibb.co/2FnP4mP/nate-grant-QQ9-Lain-S6t-I-unsplash.jpg', title:'Hello there - the three time!', previewText:'This my three post!'},
+          {id: "4", thumbnail: 'https://i.ibb.co/2FnP4mP/nate-grant-QQ9-Lain-S6t-I-unsplash.jpg', title:'Hello there - the four time!', previewText:'This my four post!'},
+        ]
+      });
+    }, 1500)
+  },
+  // created(){
+  //   setTimeout(() => {
+  //     this.loadedPosts = [
+  //       {id: "1", thumbnail: 'https://i.ibb.co/2FnP4mP/nate-grant-QQ9-Lain-S6t-I-unsplash.jpg', title:'Hello there - the one time!', previewText:'This my one post!'},
+  //       {id: "2", thumbnail: 'https://i.ibb.co/2FnP4mP/nate-grant-QQ9-Lain-S6t-I-unsplash.jpg', title:'Hello there - the two time!', previewText:'This my two post!'},
+  //       {id: "3", thumbnail: 'https://i.ibb.co/2FnP4mP/nate-grant-QQ9-Lain-S6t-I-unsplash.jpg', title:'Hello there - the three time!', previewText:'This my three post!'},
+  //       {id: "4", thumbnail: 'https://i.ibb.co/2FnP4mP/nate-grant-QQ9-Lain-S6t-I-unsplash.jpg', title:'Hello there - the four time!', previewText:'This my four post!'},
+  //     ]
+  //   }, 1500)
+  // }
+
+  created(){}
 }
 </script>
 
