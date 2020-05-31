@@ -16,10 +16,15 @@ export default {
         AdminPostForm
     },
     methods: {
-      onSubmitted() {
+      onSubmitted(postData) {
         // post request --- axios post method return promise
-        axios.post('https://nuxt-blog-ce52c.firebaseio.com/posts.json', postData)
-        .then(result => console.log(result))
+        axios.post('https://nuxt-blog-ce52c.firebaseio.com/posts.json', {
+          ...postData,
+          updatedDate: new Date()
+        })
+        .then( result => {
+          this.$router.push("/admin")
+        })
         .catch(e => console.log(e))
       }
     }

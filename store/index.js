@@ -1,4 +1,5 @@
 import Vuex from 'vuex'
+import axios from 'axios'
 
 
 // this store is function instead of object 
@@ -15,21 +16,17 @@ const createStore = () => {
             }
         },
         actions: {
+            // return promise if you run async code
             nuxtServerInit(vuexContext, context){
-                if(!process.client){ //if this is not true i.e. nuxt run on server
-                    console.log(context.req.session)
-                }
-                return new Promise((resolve, reject) => {
-                    setTimeout(() => {
-                        vuexContext.commit('setPosts', [
-                            {id: "1", thumbnail: 'https://i.ibb.co/2FnP4mP/nate-grant-QQ9-Lain-S6t-I-unsplash.jpg', title:'Hello there - the one time!', previewText:'This my one post!'},
-                            {id: "2", thumbnail: 'https://i.ibb.co/2FnP4mP/nate-grant-QQ9-Lain-S6t-I-unsplash.jpg', title:'Hello there - the two time!', previewText:'This my two post!'},
-                            {id: "3", thumbnail: 'https://i.ibb.co/2FnP4mP/nate-grant-QQ9-Lain-S6t-I-unsplash.jpg', title:'Hello there - the three time!', previewText:'This my three post!'},
-                            {id: "4", thumbnail: 'https://i.ibb.co/2FnP4mP/nate-grant-QQ9-Lain-S6t-I-unsplash.jpg', title:'Hello there - the four time!', previewText:'This my four post!'},
-                          ])
-                      resolve()
-                    }, 1500)
-                });
+                return axios.get('https://nuxt-blog-ce52c.firebaseio.com/posts.json')
+                .then(res => {
+                    const postsArray = []
+                    for(const key in res.data){
+                        postsArray.push({ ...res.data[key], id: key  })
+                    }
+                    vuexContext.commit('setPosts', postsArray)
+                })
+                .catch(e => context.error(e));
             },
             setPosts(vuexContext, posts){
                 vuexContext.commit('setPosts', posts)
