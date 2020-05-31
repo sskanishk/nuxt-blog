@@ -7,7 +7,7 @@
                 control-type="textarea"
                 v-model="editedPost.content">Content</AppControlInput>
             
-        <AppButton type="submit">Save</AppButton>
+        <AppButton type="submit">Save Post</AppButton>
         <AppButton
             type="button"
             style="margin-left: 10px"
@@ -44,7 +44,8 @@ export default {
     },
     methods:{
         onSave(){
-            console.log(this.editedPost)
+            // console.log(this.editedPost)
+            this.$emit('submit', this.editedPost)
         },
         onCancel(){
             this.$router.push('/admin');
