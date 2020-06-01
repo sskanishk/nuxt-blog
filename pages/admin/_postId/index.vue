@@ -16,7 +16,7 @@ export default {
         AdminPostForm
     },
     asyncData(context){
-        return axios.get('https://nuxt-blog-ce52c.firebaseio.com/posts/' 
+        return axios.get( process.env.baseUrl + '/posts/' 
             + context.params.postId 
             + '.json')
         .then(res => {

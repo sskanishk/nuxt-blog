@@ -52,5 +52,8 @@ module.exports = {
     extend(config, ctx) {
 
     }
+  },
+  env: {
+    baseUrl: process.env.BASE_URL || 'https://nuxt-blog-ce52c.firebaseio.com'
   }
 }
