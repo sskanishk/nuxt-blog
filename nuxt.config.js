@@ -56,6 +56,7 @@ module.exports = {
     }
   },
   env: {
-    baseUrl: process.env.BASE_URL || 'https://nuxt-blog-ce52c.firebaseio.com'
+    baseUrl: process.env.BASE_URL || 'https://nuxt-blog-ce52c.firebaseio.com',
+    fbAPIkey: 'AIzaSyCwhwAl7KeFGen_VRHzslQqox6ku6l35Uc'
   }
 }
