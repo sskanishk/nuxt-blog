@@ -3,7 +3,7 @@
     <section class="post">
       <h1 class="post-title">{{ loadedPost.title }}</h1>
       <div class="post-details">
-        <div class="post-detail">Last Updated: {{ loadedPost.updatedData }}</div>
+        <div class="post-detail">Last Updated: {{ loadedPost.updatedData | date}}</div>
         <div class="post-detail">Author: {{ loadedPost.author }}</div>
       </div>
       <p class="post-content">{{ loadedPost.content }}</p>
@@ -16,6 +16,7 @@
 
 <script>
 import axios from 'axios'
+
 export default {
   asyncData(context){
     return axios.get( process.env.baseUrl + '/posts/' + context.params.id + '.json')
@@ -82,5 +83,13 @@ export default {
 .post-feedback a:active {
   color: salmon;
 }
+
+.post-content{
+
+  text-align: justify;
+  text-justify: inter-word;
+  
+}
+
 </style>
 
